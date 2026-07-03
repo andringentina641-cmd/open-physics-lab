@@ -1,0 +1,2016 @@
+[
+    {
+        "id": "72ad2eeddb677f23",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "2c0d7f73cb39871b",
+        "type": "comment",
+        "z": "72ad2eeddb677f23",
+        "name": "WARNING: please check you have started this container with a volume that is mounted to /data",
+        "info": "To start docker with a bind mount volume (-v option), for example:\n\ndocker run -it -p 1880:1880 -v /home/user/node_red_data:/data --name mynodered nodered/node-red\n\nwhere /home/user/node_red_data is a directory on your host machine where you want to store your flows.",
+        "x": 350,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "c9551ea0994f1c5e",
+        "type": "inject",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Nachricht",
+        "payload": "Hallo Welt",
+        "payloadType": "str",
+        "x": 170,
+        "y": 260,
+        "wires": [
+            [
+                "e1e1433c5faa2ba6"
+            ]
+        ]
+    },
+    {
+        "id": "e1e1433c5faa2ba6",
+        "type": "debug",
+        "z": "72ad2eeddb677f23",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "39b69679f9014cd0",
+        "type": "inject",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Raumfühler Küche",
+        "payload": "{\"zustand\":\"ok\",\"batterie\":80,\"taste1\":true,\"taste2\":false,\"temperatur\":{\"wert\":19,\"einheit\":\"°C\"},\"co2\":{\"wert\":1000,\"einheit\":\"ppm\"}}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 360,
+        "wires": [
+            [
+                "3156d2794909104c"
+            ]
+        ]
+    },
+    {
+        "id": "8eb45fa0abcb211d",
+        "type": "debug",
+        "z": "72ad2eeddb677f23",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "3156d2794909104c",
+        "type": "change",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.temperatur.wert",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 360,
+        "wires": [
+            [
+                "9221c5bedff5794e"
+            ]
+        ]
+    },
+    {
+        "id": "9221c5bedff5794e",
+        "type": "switch",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lt",
+                "v": "20",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 560,
+        "y": 360,
+        "wires": [
+            [
+                "8eb45fa0abcb211d"
+            ]
+        ]
+    },
+    {
+        "id": "70203db233f394a3",
+        "type": "ui_switch",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "label": "Schalter",
+        "tooltip": "Das ist ein Lutscher namens Bruno",
+        "group": "f84733aeb37c764a",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "Schalter",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 320,
+        "y": 590,
+        "wires": [
+            [
+                "afc6c0f885fe6558",
+                "43cbabc02ab171d4"
+            ]
+        ]
+    },
+    {
+        "id": "afc6c0f885fe6558",
+        "type": "debug",
+        "z": "72ad2eeddb677f23",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 590,
+        "wires": []
+    },
+    {
+        "id": "43cbabc02ab171d4",
+        "type": "ui_text_input",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "label": "Information",
+        "tooltip": "",
+        "group": "f84733aeb37c764a",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 550,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2886fa965e331764",
+        "type": "ui_switch",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "label": "Küche",
+        "tooltip": "",
+        "group": "2474b6e626a031e7",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 530,
+        "y": 820,
+        "wires": [
+            [
+                "48b8f3e068540978"
+            ]
+        ]
+    },
+    {
+        "id": "f40e20f99af72806",
+        "type": "ui_switch",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "label": "Sitzplatz",
+        "tooltip": "",
+        "group": "2474b6e626a031e7",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 550,
+        "y": 1030,
+        "wires": [
+            [
+                "b957d0670d655eb8"
+            ]
+        ]
+    },
+    {
+        "id": "b9400104fb28e107",
+        "type": "ui_switch",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "label": "Wohnzimmer",
+        "tooltip": "",
+        "group": "2474b6e626a031e7",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 560,
+        "y": 950,
+        "wires": [
+            [
+                "a9299d740b0ace58"
+            ]
+        ]
+    },
+    {
+        "id": "9fdf2619f067236b",
+        "type": "ui_switch",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "label": "Schlafzimmer",
+        "tooltip": "",
+        "group": "2474b6e626a031e7",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 570,
+        "y": 990,
+        "wires": [
+            [
+                "96fa76255041474c"
+            ]
+        ]
+    },
+    {
+        "id": "eadc51e27fb5bb0a",
+        "type": "ui_slider",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "label": "Höhe",
+        "tooltip": "",
+        "group": "6ef876aa44faaf99",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "className": "",
+        "x": 290,
+        "y": 1080,
+        "wires": [
+            [
+                "509b63c5158cde7d"
+            ]
+        ]
+    },
+    {
+        "id": "6864ca5e6f3ef224",
+        "type": "ui_button",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "group": "6ef876aa44faaf99",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Auf",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 290,
+        "y": 1120,
+        "wires": [
+            [
+                "8d6e0be8a1bccee7"
+            ]
+        ]
+    },
+    {
+        "id": "2426c710c2e2999d",
+        "type": "ui_button",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "group": "6ef876aa44faaf99",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Ab",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 290,
+        "y": 1160,
+        "wires": [
+            [
+                "8d6e0be8a1bccee7"
+            ]
+        ]
+    },
+    {
+        "id": "e68a8f4a33ae29c6",
+        "type": "ui_slider",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "label": "Dimmwert",
+        "tooltip": "",
+        "group": "1a75f2576e287ad4",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "className": "",
+        "x": 280,
+        "y": 1580,
+        "wires": [
+            [
+                "d26333ffd4bbef32"
+            ]
+        ]
+    },
+    {
+        "id": "eaf46cc35dde049f",
+        "type": "ui_button",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "group": "1a75f2576e287ad4",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "An",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 290,
+        "y": 1620,
+        "wires": [
+            [
+                "4ec124ef38f92b1a"
+            ]
+        ]
+    },
+    {
+        "id": "7fb778293fc4b7ff",
+        "type": "ui_button",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "group": "1a75f2576e287ad4",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Aus",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 290,
+        "y": 1660,
+        "wires": [
+            [
+                "4ec124ef38f92b1a"
+            ]
+        ]
+    },
+    {
+        "id": "48b8f3e068540978",
+        "type": "knxUltimate",
+        "z": "72ad2eeddb677f23",
+        "server": "c72238e2779ab1dc",
+        "topic": "1/0/20",
+        "setTopicType": "str",
+        "outputtopic": "",
+        "dpt": "1.001",
+        "initialread": 0,
+        "notifyreadrequest": false,
+        "notifyresponse": false,
+        "notifywrite": true,
+        "notifyreadrequestalsorespondtobus": true,
+        "notifyreadrequestalsorespondtobusdefaultvalueifnotinitialized": "0",
+        "name": "",
+        "outputtype": "write",
+        "outputRBE": "false",
+        "inputRBE": "false",
+        "formatmultiplyvalue": 1,
+        "formatnegativevalue": "leave",
+        "formatdecimalsvalue": 999,
+        "passthrough": "no",
+        "sendMsgToKNXCode": "",
+        "receiveMsgFromKNXCode": "",
+        "listenallga": false,
+        "gaSecure": "false",
+        "buttonEnabled": true,
+        "buttonMode": "toggle",
+        "buttonStaticValue": "",
+        "buttonToggleInitial": "false",
+        "periodicSend": false,
+        "periodicSendInterval": 60,
+        "x": 790,
+        "y": 840,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a9299d740b0ace58",
+        "type": "knxUltimate",
+        "z": "72ad2eeddb677f23",
+        "server": "c72238e2779ab1dc",
+        "topic": "1/0/15",
+        "setTopicType": "str",
+        "outputtopic": "",
+        "dpt": "1.001",
+        "initialread": 0,
+        "notifyreadrequest": false,
+        "notifyresponse": false,
+        "notifywrite": true,
+        "notifyreadrequestalsorespondtobus": false,
+        "notifyreadrequestalsorespondtobusdefaultvalueifnotinitialized": "0",
+        "name": "",
+        "outputtype": "write",
+        "outputRBE": "true",
+        "inputRBE": "false",
+        "formatmultiplyvalue": 1,
+        "formatnegativevalue": "leave",
+        "formatdecimalsvalue": 999,
+        "passthrough": "no",
+        "sendMsgToKNXCode": "",
+        "receiveMsgFromKNXCode": "",
+        "listenallga": false,
+        "gaSecure": "false",
+        "buttonEnabled": true,
+        "buttonMode": "toggle",
+        "buttonStaticValue": "",
+        "buttonToggleInitial": "false",
+        "periodicSend": false,
+        "periodicSendInterval": 60,
+        "x": 810,
+        "y": 940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "96fa76255041474c",
+        "type": "knxUltimate",
+        "z": "72ad2eeddb677f23",
+        "server": "c72238e2779ab1dc",
+        "topic": "2/0/10",
+        "setTopicType": "str",
+        "outputtopic": "",
+        "dpt": "1.001",
+        "initialread": 0,
+        "notifyreadrequest": false,
+        "notifyresponse": false,
+        "notifywrite": true,
+        "notifyreadrequestalsorespondtobus": false,
+        "notifyreadrequestalsorespondtobusdefaultvalueifnotinitialized": "0",
+        "name": "",
+        "outputtype": "write",
+        "outputRBE": "true",
+        "inputRBE": "false",
+        "formatmultiplyvalue": 1,
+        "formatnegativevalue": "leave",
+        "formatdecimalsvalue": 999,
+        "passthrough": "no",
+        "sendMsgToKNXCode": "",
+        "receiveMsgFromKNXCode": "",
+        "listenallga": false,
+        "gaSecure": "false",
+        "buttonEnabled": true,
+        "buttonMode": "toggle",
+        "buttonStaticValue": "",
+        "buttonToggleInitial": "false",
+        "periodicSend": false,
+        "periodicSendInterval": 60,
+        "x": 810,
+        "y": 980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b957d0670d655eb8",
+        "type": "knxUltimate",
+        "z": "72ad2eeddb677f23",
+        "server": "c72238e2779ab1dc",
+        "topic": "1/0/30",
+        "setTopicType": "str",
+        "outputtopic": "",
+        "dpt": "1.001",
+        "initialread": 0,
+        "notifyreadrequest": false,
+        "notifyresponse": false,
+        "notifywrite": true,
+        "notifyreadrequestalsorespondtobus": false,
+        "notifyreadrequestalsorespondtobusdefaultvalueifnotinitialized": "0",
+        "name": "",
+        "outputtype": "write",
+        "outputRBE": "true",
+        "inputRBE": "false",
+        "formatmultiplyvalue": 1,
+        "formatnegativevalue": "leave",
+        "formatdecimalsvalue": 999,
+        "passthrough": "no",
+        "sendMsgToKNXCode": "",
+        "receiveMsgFromKNXCode": "",
+        "listenallga": false,
+        "gaSecure": "false",
+        "buttonEnabled": true,
+        "buttonMode": "toggle",
+        "buttonStaticValue": "",
+        "buttonToggleInitial": "false",
+        "periodicSend": false,
+        "periodicSendInterval": 60,
+        "x": 810,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f6d2e064de26b738",
+        "type": "knxUltimate",
+        "z": "72ad2eeddb677f23",
+        "server": "c72238e2779ab1dc",
+        "topic": "1/0/23",
+        "setTopicType": "str",
+        "outputtopic": "",
+        "dpt": "1.001",
+        "initialread": 0,
+        "notifyreadrequest": false,
+        "notifyresponse": false,
+        "notifywrite": true,
+        "notifyreadrequestalsorespondtobus": false,
+        "notifyreadrequestalsorespondtobusdefaultvalueifnotinitialized": "0",
+        "name": "",
+        "outputtype": "write",
+        "outputRBE": "true",
+        "inputRBE": "false",
+        "formatmultiplyvalue": 1,
+        "formatnegativevalue": "leave",
+        "formatdecimalsvalue": 999,
+        "passthrough": "no",
+        "sendMsgToKNXCode": "",
+        "receiveMsgFromKNXCode": "",
+        "listenallga": false,
+        "gaSecure": "false",
+        "buttonEnabled": true,
+        "buttonMode": "toggle",
+        "buttonStaticValue": "",
+        "buttonToggleInitial": "false",
+        "periodicSend": false,
+        "periodicSendInterval": 60,
+        "x": 270,
+        "y": 840,
+        "wires": [
+            [
+                "2886fa965e331764"
+            ]
+        ]
+    },
+    {
+        "id": "c34f416ec02fbc57",
+        "type": "knxUltimate",
+        "z": "72ad2eeddb677f23",
+        "server": "c72238e2779ab1dc",
+        "topic": "1/0/18",
+        "setTopicType": "str",
+        "outputtopic": "",
+        "dpt": "1.001",
+        "initialread": 0,
+        "notifyreadrequest": false,
+        "notifyresponse": false,
+        "notifywrite": true,
+        "notifyreadrequestalsorespondtobus": false,
+        "notifyreadrequestalsorespondtobusdefaultvalueifnotinitialized": "0",
+        "name": "",
+        "outputtype": "write",
+        "outputRBE": "true",
+        "inputRBE": "false",
+        "formatmultiplyvalue": 1,
+        "formatnegativevalue": "leave",
+        "formatdecimalsvalue": 999,
+        "passthrough": "no",
+        "sendMsgToKNXCode": "",
+        "receiveMsgFromKNXCode": "",
+        "listenallga": false,
+        "gaSecure": "false",
+        "buttonEnabled": true,
+        "buttonMode": "toggle",
+        "buttonStaticValue": "",
+        "buttonToggleInitial": "false",
+        "periodicSend": false,
+        "periodicSendInterval": 60,
+        "x": 330,
+        "y": 940,
+        "wires": [
+            [
+                "b9400104fb28e107"
+            ]
+        ]
+    },
+    {
+        "id": "b7529d151eb48e4d",
+        "type": "knxUltimate",
+        "z": "72ad2eeddb677f23",
+        "server": "c72238e2779ab1dc",
+        "topic": "2/0/13",
+        "setTopicType": "str",
+        "outputtopic": "",
+        "dpt": "1.001",
+        "initialread": 0,
+        "notifyreadrequest": false,
+        "notifyresponse": false,
+        "notifywrite": true,
+        "notifyreadrequestalsorespondtobus": false,
+        "notifyreadrequestalsorespondtobusdefaultvalueifnotinitialized": "0",
+        "name": "",
+        "outputtype": "write",
+        "outputRBE": "true",
+        "inputRBE": "false",
+        "formatmultiplyvalue": 1,
+        "formatnegativevalue": "leave",
+        "formatdecimalsvalue": 999,
+        "passthrough": "no",
+        "sendMsgToKNXCode": "",
+        "receiveMsgFromKNXCode": "",
+        "listenallga": false,
+        "gaSecure": "false",
+        "buttonEnabled": true,
+        "buttonMode": "toggle",
+        "buttonStaticValue": "",
+        "buttonToggleInitial": "false",
+        "periodicSend": false,
+        "periodicSendInterval": 60,
+        "x": 330,
+        "y": 980,
+        "wires": [
+            [
+                "9fdf2619f067236b"
+            ]
+        ]
+    },
+    {
+        "id": "bda7b75e6e11f126",
+        "type": "knxUltimate",
+        "z": "72ad2eeddb677f23",
+        "server": "c72238e2779ab1dc",
+        "topic": "1/0/33",
+        "setTopicType": "str",
+        "outputtopic": "",
+        "dpt": "1.001",
+        "initialread": 0,
+        "notifyreadrequest": false,
+        "notifyresponse": false,
+        "notifywrite": true,
+        "notifyreadrequestalsorespondtobus": false,
+        "notifyreadrequestalsorespondtobusdefaultvalueifnotinitialized": "0",
+        "name": "",
+        "outputtype": "write",
+        "outputRBE": "true",
+        "inputRBE": "false",
+        "formatmultiplyvalue": 1,
+        "formatnegativevalue": "leave",
+        "formatdecimalsvalue": 999,
+        "passthrough": "no",
+        "sendMsgToKNXCode": "",
+        "receiveMsgFromKNXCode": "",
+        "listenallga": false,
+        "gaSecure": "false",
+        "buttonEnabled": true,
+        "buttonMode": "toggle",
+        "buttonStaticValue": "",
+        "buttonToggleInitial": "false",
+        "periodicSend": false,
+        "periodicSendInterval": 60,
+        "x": 330,
+        "y": 1020,
+        "wires": [
+            [
+                "f40e20f99af72806"
+            ]
+        ]
+    },
+    {
+        "id": "509b63c5158cde7d",
+        "type": "knxUltimate",
+        "z": "72ad2eeddb677f23",
+        "server": "c72238e2779ab1dc",
+        "topic": "1/1/12",
+        "setTopicType": "str",
+        "outputtopic": "",
+        "dpt": "1.001",
+        "initialread": 0,
+        "notifyreadrequest": false,
+        "notifyresponse": false,
+        "notifywrite": true,
+        "notifyreadrequestalsorespondtobus": false,
+        "notifyreadrequestalsorespondtobusdefaultvalueifnotinitialized": "0",
+        "name": "",
+        "outputtype": "write",
+        "outputRBE": "false",
+        "inputRBE": "false",
+        "formatmultiplyvalue": 1,
+        "formatnegativevalue": "leave",
+        "formatdecimalsvalue": 999,
+        "passthrough": "no",
+        "sendMsgToKNXCode": "",
+        "receiveMsgFromKNXCode": "",
+        "listenallga": false,
+        "gaSecure": "false",
+        "buttonEnabled": true,
+        "buttonMode": "toggle",
+        "buttonStaticValue": "",
+        "buttonToggleInitial": "false",
+        "periodicSend": false,
+        "periodicSendInterval": 60,
+        "x": 470,
+        "y": 1080,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8d6e0be8a1bccee7",
+        "type": "knxUltimate",
+        "z": "72ad2eeddb677f23",
+        "server": "c72238e2779ab1dc",
+        "topic": "1/1/10",
+        "setTopicType": "str",
+        "outputtopic": "",
+        "dpt": "1.001",
+        "initialread": 0,
+        "notifyreadrequest": false,
+        "notifyresponse": false,
+        "notifywrite": true,
+        "notifyreadrequestalsorespondtobus": false,
+        "notifyreadrequestalsorespondtobusdefaultvalueifnotinitialized": "0",
+        "name": "",
+        "outputtype": "write",
+        "outputRBE": "true",
+        "inputRBE": "false",
+        "formatmultiplyvalue": 1,
+        "formatnegativevalue": "leave",
+        "formatdecimalsvalue": 999,
+        "passthrough": "no",
+        "sendMsgToKNXCode": "",
+        "receiveMsgFromKNXCode": "",
+        "listenallga": false,
+        "gaSecure": "false",
+        "buttonEnabled": true,
+        "buttonMode": "toggle",
+        "buttonStaticValue": "",
+        "buttonToggleInitial": "false",
+        "periodicSend": false,
+        "periodicSendInterval": 60,
+        "x": 490,
+        "y": 1160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bfb477c49297d651",
+        "type": "knxUltimate",
+        "z": "72ad2eeddb677f23",
+        "server": "c72238e2779ab1dc",
+        "topic": "1/1/11",
+        "setTopicType": "str",
+        "outputtopic": "",
+        "dpt": "1.001",
+        "initialread": 0,
+        "notifyreadrequest": false,
+        "notifyresponse": false,
+        "notifywrite": true,
+        "notifyreadrequestalsorespondtobus": false,
+        "notifyreadrequestalsorespondtobusdefaultvalueifnotinitialized": "0",
+        "name": "",
+        "outputtype": "write",
+        "outputRBE": "false",
+        "inputRBE": "false",
+        "formatmultiplyvalue": 1,
+        "formatnegativevalue": "leave",
+        "formatdecimalsvalue": 999,
+        "passthrough": "no",
+        "sendMsgToKNXCode": "",
+        "receiveMsgFromKNXCode": "",
+        "listenallga": false,
+        "gaSecure": "false",
+        "buttonEnabled": true,
+        "buttonMode": "toggle",
+        "buttonStaticValue": "",
+        "buttonToggleInitial": "false",
+        "periodicSend": false,
+        "periodicSendInterval": 60,
+        "x": 550,
+        "y": 1300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0d63a274407861bc",
+        "type": "knxUltimate",
+        "z": "72ad2eeddb677f23",
+        "server": "c72238e2779ab1dc",
+        "topic": "1/1/16",
+        "setTopicType": "str",
+        "outputtopic": "",
+        "dpt": "5.001",
+        "initialread": 0,
+        "notifyreadrequest": false,
+        "notifyresponse": false,
+        "notifywrite": true,
+        "notifyreadrequestalsorespondtobus": false,
+        "notifyreadrequestalsorespondtobusdefaultvalueifnotinitialized": "0",
+        "name": "",
+        "outputtype": "write",
+        "outputRBE": "true",
+        "inputRBE": "false",
+        "formatmultiplyvalue": 1,
+        "formatnegativevalue": "leave",
+        "formatdecimalsvalue": 999,
+        "passthrough": "no",
+        "sendMsgToKNXCode": "",
+        "receiveMsgFromKNXCode": "",
+        "listenallga": false,
+        "gaSecure": "false",
+        "buttonEnabled": true,
+        "buttonMode": "toggle",
+        "buttonStaticValue": "",
+        "buttonToggleInitial": "false",
+        "periodicSend": false,
+        "periodicSendInterval": 60,
+        "x": 110,
+        "y": 1080,
+        "wires": [
+            [
+                "eadc51e27fb5bb0a"
+            ]
+        ]
+    },
+    {
+        "id": "719b20f89ce442bf",
+        "type": "ui_button",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "group": "6ef876aa44faaf99",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Lamellen auf / Stopp",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 340,
+        "y": 1280,
+        "wires": [
+            [
+                "bfb477c49297d651"
+            ]
+        ]
+    },
+    {
+        "id": "ba1bc1f693054e19",
+        "type": "ui_button",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "group": "6ef876aa44faaf99",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Lamellen ab /stopp",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 330,
+        "y": 1320,
+        "wires": [
+            [
+                "bfb477c49297d651"
+            ]
+        ]
+    },
+    {
+        "id": "1dbfa6332073a54a",
+        "type": "ui_slider",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "label": "winkel",
+        "tooltip": "",
+        "group": "6ef876aa44faaf99",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": "-100",
+        "max": 100,
+        "step": 1,
+        "className": "",
+        "x": 290,
+        "y": 1240,
+        "wires": [
+            [
+                "6263a9e0a43fa394"
+            ]
+        ]
+    },
+    {
+        "id": "6263a9e0a43fa394",
+        "type": "knxUltimate",
+        "z": "72ad2eeddb677f23",
+        "server": "c72238e2779ab1dc",
+        "topic": "1/1/13",
+        "setTopicType": "str",
+        "outputtopic": "",
+        "dpt": "1.001",
+        "initialread": 0,
+        "notifyreadrequest": false,
+        "notifyresponse": false,
+        "notifywrite": true,
+        "notifyreadrequestalsorespondtobus": false,
+        "notifyreadrequestalsorespondtobusdefaultvalueifnotinitialized": "0",
+        "name": "",
+        "outputtype": "write",
+        "outputRBE": "false",
+        "inputRBE": "false",
+        "formatmultiplyvalue": 1,
+        "formatnegativevalue": "leave",
+        "formatdecimalsvalue": 999,
+        "passthrough": "no",
+        "sendMsgToKNXCode": "",
+        "receiveMsgFromKNXCode": "",
+        "listenallga": false,
+        "gaSecure": "false",
+        "buttonEnabled": true,
+        "buttonMode": "toggle",
+        "buttonStaticValue": "",
+        "buttonToggleInitial": "false",
+        "periodicSend": false,
+        "periodicSendInterval": 60,
+        "x": 470,
+        "y": 1240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "eab63e758f3b9a82",
+        "type": "knxUltimate",
+        "z": "72ad2eeddb677f23",
+        "server": "c72238e2779ab1dc",
+        "topic": "1/1/17",
+        "setTopicType": "str",
+        "outputtopic": "",
+        "dpt": "1.001",
+        "initialread": 0,
+        "notifyreadrequest": false,
+        "notifyresponse": false,
+        "notifywrite": true,
+        "notifyreadrequestalsorespondtobus": false,
+        "notifyreadrequestalsorespondtobusdefaultvalueifnotinitialized": "0",
+        "name": "",
+        "outputtype": "write",
+        "outputRBE": "false",
+        "inputRBE": "false",
+        "formatmultiplyvalue": 1,
+        "formatnegativevalue": "leave",
+        "formatdecimalsvalue": 999,
+        "passthrough": "no",
+        "sendMsgToKNXCode": "",
+        "receiveMsgFromKNXCode": "",
+        "listenallga": false,
+        "gaSecure": "false",
+        "buttonEnabled": true,
+        "buttonMode": "toggle",
+        "buttonStaticValue": "",
+        "buttonToggleInitial": "false",
+        "periodicSend": false,
+        "periodicSendInterval": 60,
+        "x": 130,
+        "y": 1240,
+        "wires": [
+            [
+                "1dbfa6332073a54a"
+            ]
+        ]
+    },
+    {
+        "id": "d26333ffd4bbef32",
+        "type": "knxUltimate",
+        "z": "72ad2eeddb677f23",
+        "server": "c72238e2779ab1dc",
+        "topic": "1/0/26",
+        "setTopicType": "str",
+        "outputtopic": "",
+        "dpt": "1.001",
+        "initialread": 0,
+        "notifyreadrequest": false,
+        "notifyresponse": false,
+        "notifywrite": true,
+        "notifyreadrequestalsorespondtobus": false,
+        "notifyreadrequestalsorespondtobusdefaultvalueifnotinitialized": "0",
+        "name": "",
+        "outputtype": "write",
+        "outputRBE": "true",
+        "inputRBE": "false",
+        "formatmultiplyvalue": 1,
+        "formatnegativevalue": "leave",
+        "formatdecimalsvalue": 999,
+        "passthrough": "no",
+        "sendMsgToKNXCode": "",
+        "receiveMsgFromKNXCode": "",
+        "listenallga": false,
+        "gaSecure": "false",
+        "buttonEnabled": true,
+        "buttonMode": "toggle",
+        "buttonStaticValue": "",
+        "buttonToggleInitial": "false",
+        "periodicSend": false,
+        "periodicSendInterval": 60,
+        "x": 470,
+        "y": 1580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4a92248a584eee59",
+        "type": "knxUltimate",
+        "z": "72ad2eeddb677f23",
+        "server": "c72238e2779ab1dc",
+        "topic": "1/0/29",
+        "setTopicType": "str",
+        "outputtopic": "",
+        "dpt": "1.001",
+        "initialread": 0,
+        "notifyreadrequest": false,
+        "notifyresponse": false,
+        "notifywrite": true,
+        "notifyreadrequestalsorespondtobus": false,
+        "notifyreadrequestalsorespondtobusdefaultvalueifnotinitialized": "0",
+        "name": "",
+        "outputtype": "write",
+        "outputRBE": "true",
+        "inputRBE": "false",
+        "formatmultiplyvalue": 1,
+        "formatnegativevalue": "leave",
+        "formatdecimalsvalue": 999,
+        "passthrough": "no",
+        "sendMsgToKNXCode": "",
+        "receiveMsgFromKNXCode": "",
+        "listenallga": false,
+        "gaSecure": "false",
+        "buttonEnabled": true,
+        "buttonMode": "toggle",
+        "buttonStaticValue": "",
+        "buttonToggleInitial": "false",
+        "periodicSend": false,
+        "periodicSendInterval": 60,
+        "x": 70,
+        "y": 1580,
+        "wires": [
+            [
+                "e68a8f4a33ae29c6"
+            ]
+        ]
+    },
+    {
+        "id": "4ec124ef38f92b1a",
+        "type": "knxUltimate",
+        "z": "72ad2eeddb677f23",
+        "server": "c72238e2779ab1dc",
+        "topic": "1/0/25",
+        "setTopicType": "str",
+        "outputtopic": "",
+        "dpt": "1.001",
+        "initialread": 0,
+        "notifyreadrequest": false,
+        "notifyresponse": false,
+        "notifywrite": true,
+        "notifyreadrequestalsorespondtobus": false,
+        "notifyreadrequestalsorespondtobusdefaultvalueifnotinitialized": "0",
+        "name": "",
+        "outputtype": "write",
+        "outputRBE": "true",
+        "inputRBE": "false",
+        "formatmultiplyvalue": 1,
+        "formatnegativevalue": "leave",
+        "formatdecimalsvalue": 999,
+        "passthrough": "no",
+        "sendMsgToKNXCode": "",
+        "receiveMsgFromKNXCode": "",
+        "listenallga": false,
+        "gaSecure": "false",
+        "buttonEnabled": true,
+        "buttonMode": "toggle",
+        "buttonStaticValue": "",
+        "buttonToggleInitial": "false",
+        "periodicSend": false,
+        "periodicSendInterval": 60,
+        "x": 470,
+        "y": 1640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e40664d1cb068dbf",
+        "type": "ui_switch",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "label": "Heizung Ein",
+        "tooltip": "",
+        "group": "d6ee027ab7fe158a",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "heizung_ein",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 160,
+        "y": 2100,
+        "wires": [
+            [
+                "693647ac6a335e2c"
+            ]
+        ]
+    },
+    {
+        "id": "be75c37af827ee54",
+        "type": "ui_slider",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "label": "Aussentemperatur: {{value}}°C",
+        "tooltip": "Simulierter Wert (ModbusRTU)",
+        "group": "d6ee027ab7fe158a",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "all",
+        "topic": "aussentemp",
+        "topicType": "str",
+        "min": -25,
+        "max": 35,
+        "step": 1,
+        "className": "",
+        "x": 170,
+        "y": 2160,
+        "wires": [
+            [
+                "693647ac6a335e2c"
+            ]
+        ]
+    },
+    {
+        "id": "966214843e0d1620",
+        "type": "ui_slider",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "label": "Frostschutz Limit: {{value}}°C",
+        "tooltip": "Einstellbar von 0°C bis 10°C",
+        "group": "d6ee027ab7fe158a",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "all",
+        "topic": "frostschutz",
+        "topicType": "str",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "className": "",
+        "x": 150,
+        "y": 2220,
+        "wires": [
+            [
+                "693647ac6a335e2c"
+            ]
+        ]
+    },
+    {
+        "id": "e41a92e8cc4b2bb0",
+        "type": "ui_switch",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "label": "Dauer-Ein",
+        "tooltip": "Übersteuert die Nachtabsenkung",
+        "group": "d6ee027ab7fe158a",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "party_modus",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 160,
+        "y": 2280,
+        "wires": [
+            [
+                "693647ac6a335e2c"
+            ]
+        ]
+    },
+    {
+        "id": "5e23f3602eeeea55",
+        "type": "inject",
+        "z": "72ad2eeddb677f23",
+        "name": "Minuten-Tick",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "tick",
+        "x": 160,
+        "y": 2340,
+        "wires": [
+            [
+                "693647ac6a335e2c"
+            ]
+        ]
+    },
+    {
+        "id": "693647ac6a335e2c",
+        "type": "function",
+        "z": "72ad2eeddb677f23",
+        "name": "Logik & Timer Heizkreis 1",
+        "func": "// Werte im Context speichern\nif (msg.topic === \"heizung_ein\") flow.set(\"hk1_heizung\", msg.payload);\nelse if (msg.topic === \"aussentemp\") flow.set(\"hk1_aussen\", msg.payload);\nelse if (msg.topic === \"frostschutz\") flow.set(\"hk1_frost\", msg.payload);\nelse if (msg.topic === \"party_modus\") flow.set(\"hk1_party\", msg.payload);\nelse if (msg.topic === \"timer\") flow.set(\"hk1_timerActive\", msg.payload);\n\nvar heizung = flow.get(\"hk1_heizung\") === true || flow.get(\"hk1_heizung\") === \"true\";\nvar aussen = Number(flow.get(\"hk1_aussen\")) || 0;\nvar frost = Number(flow.get(\"hk1_frost\")) || 3;\nvar party = flow.get(\"hk1_party\") === true || flow.get(\"hk1_party\") === \"true\";\nvar timerAktiv = flow.get(\"hk1_timerActive\") === true || flow.get(\"hk1_timerActive\") === \"true\";\n\nif (party) timerAktiv = true;\n\n// --- SOLLTEMPERATUR BERECHNEN ---\nvar solltemp = -aussen + 40;\nif (solltemp > 70) solltemp = 70;\nif (solltemp < 20) solltemp = 20;\n\n// --- PUMPEN LOGIK & STATUS FARBEN ---\nvar statusText = \"Warte auf Daten...\";\nvar bgColor = \"#95a5a6\"; // Standard-Grau\nvar sommerbetrieb = (aussen >= 22);\nvar pumpeAn = false;\n\nif (aussen < frost) {\n    statusText = \"❄️ Frostschutz (Pumpe EIN)\";\n    bgColor = \"#3498db\"; // Blau\n    pumpeAn = true;\n} else if (!heizung) {\n    statusText = \"❌ Hauptschalter AUS\";\n    bgColor = \"#7f8c8d\"; // Dunkelgrau\n    pumpeAn = false;\n} else if (sommerbetrieb) {\n    statusText = \"🏖️ Sommerbetrieb > 22°C\";\n    bgColor = \"#f39c12\"; // Orange\n    solltemp = 20;\n    pumpeAn = false;\n} else if (timerAktiv && party) {\n    statusText = \"🔥 Dauer-Ein aktiv (Pumpe EIN)\";\n    bgColor = \"#e74c3c\"; // Rot\n    pumpeAn = true;\n} else if (timerAktiv) {\n    statusText = \"☀️ Tagbetrieb (Pumpe EIN)\";\n    bgColor = \"#2ecc71\"; // Grün\n    pumpeAn = true;\n} else {\n    statusText = \"🌙 Nachtabsenkung (Pumpe AUS)\";\n    bgColor = \"#34495e\"; // Nachtblau\n    pumpeAn = false;\n}\n\nreturn [\n    { payload: statusText, color: bgColor }, \n    { payload: solltemp },\n    { payload: pumpeAn ? \"AN\" : \"AUS\", color: pumpeAn ? \"#2ecc71\" : \"#e74c3c\" }\n];",
+        "outputs": 3,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 2160,
+        "wires": [
+            [
+                "0543c7c2eb2b78f9"
+            ],
+            [
+                "58e64d7d807d3fc9",
+                "a98633a59988e9fb",
+                "8de9c85f8b68e270"
+            ],
+            [
+                "f6070ecae65fdab4"
+            ]
+        ]
+    },
+    {
+        "id": "0543c7c2eb2b78f9",
+        "type": "ui_template",
+        "z": "72ad2eeddb677f23",
+        "group": "595d0c7ba3776f66",
+        "name": "Status Badge",
+        "order": 1,
+        "width": 6,
+        "height": 2,
+        "format": "<div style=\"display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 0 10px;\">\n    <div style=\"font-size: 13px; color: var(--nr-dashboard-widgetTextColor); margin-bottom: 8px; opacity: 0.8;\">\n        Aktueller Status Heizkreis\n    </div>\n    <div style=\"background-color: {{msg.color || '#95a5a6'}}; color: #ffffff; padding: 12px 15px; border-radius: 8px; font-weight: bold; font-size: 16px; width: 100%; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: background-color 0.4s ease;\">\n        {{msg.payload || 'Warte auf Daten...'}}\n    </div>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 740,
+        "y": 2060,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "58e64d7d807d3fc9",
+        "type": "ui_gauge",
+        "z": "72ad2eeddb677f23",
+        "name": "",
+        "group": "595d0c7ba3776f66",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "donut",
+        "title": "VL 1 Solltemperatur",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 80,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": 30,
+        "seg2": 55,
+        "diff": false,
+        "className": "",
+        "x": 750,
+        "y": 2140,
+        "wires": []
+    },
+    {
+        "id": "a98633a59988e9fb",
+        "type": "ui_chart",
+        "z": "72ad2eeddb677f23",
+        "name": "Verlauf Solltemperatur",
+        "group": "595d0c7ba3776f66",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Verlauf Solltemperatur",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "Warte auf Daten...",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "80",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 760,
+        "y": 2200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f6070ecae65fdab4",
+        "type": "ui_text",
+        "z": "72ad2eeddb677f23",
+        "group": "595d0c7ba3776f66",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "Pumpe Status",
+        "label": "Zustand Heizungspumpe:",
+        "format": "<span style=\"color: {{msg.color}}; font-weight: bold; font-size: 1.1em;\">{{msg.payload}}</span>",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 740,
+        "y": 2260,
+        "wires": []
+    },
+    {
+        "id": "36e99aaadf318043",
+        "type": "inject",
+        "z": "72ad2eeddb677f23",
+        "name": "Neustart Init",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 2400,
+        "wires": [
+            [
+                "b250cb40e0db8533"
+            ]
+        ]
+    },
+    {
+        "id": "b250cb40e0db8533",
+        "type": "file in",
+        "z": "72ad2eeddb677f23",
+        "name": "Config laden",
+        "filename": "timer_hk1.config",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 330,
+        "y": 2400,
+        "wires": [
+            [
+                "90ab63f68c9ab700"
+            ]
+        ]
+    },
+    {
+        "id": "90ab63f68c9ab700",
+        "type": "ui_time_scheduler",
+        "z": "72ad2eeddb677f23",
+        "group": "d6ee027ab7fe158a",
+        "name": "Heizung Wochenprogramm",
+        "customPayload": false,
+        "outputs": 2,
+        "order": 5,
+        "width": "6",
+        "height": "5",
+        "x": 550,
+        "y": 2400,
+        "wires": [
+            [
+                "a81c15fe99cea04c"
+            ],
+            [
+                "83a8bef8944c00c9"
+            ]
+        ]
+    },
+    {
+        "id": "a81c15fe99cea04c",
+        "type": "file",
+        "z": "72ad2eeddb677f23",
+        "name": "Config speichern",
+        "filename": "timer_hk1.config",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 810,
+        "y": 2360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "83a8bef8944c00c9",
+        "type": "change",
+        "z": "72ad2eeddb677f23",
+        "name": "Topic = timer",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "timer",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 2440,
+        "wires": [
+            [
+                "693647ac6a335e2c"
+            ]
+        ]
+    },
+    {
+        "id": "200b0bd5606f4b6f",
+        "type": "inject",
+        "z": "72ad2eeddb677f23",
+        "name": "Neustart Init",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 1400,
+        "wires": [
+            [
+                "8f83d60a5a2d2043"
+            ]
+        ]
+    },
+    {
+        "id": "8f83d60a5a2d2043",
+        "type": "file in",
+        "z": "72ad2eeddb677f23",
+        "name": "Config laden",
+        "filename": "timer_jalousie.config",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 330,
+        "y": 1400,
+        "wires": [
+            [
+                "c87b7f731f1ae696"
+            ]
+        ]
+    },
+    {
+        "id": "c87b7f731f1ae696",
+        "type": "ui_time_scheduler",
+        "z": "72ad2eeddb677f23",
+        "group": "6ef876aa44faaf99",
+        "name": "Jalousie Automatik",
+        "customPayload": false,
+        "outputs": 2,
+        "order": 10,
+        "width": "6",
+        "height": "4",
+        "x": 550,
+        "y": 1400,
+        "wires": [
+            [
+                "25da02cbcbbc9806"
+            ],
+            [
+                "45d29b1e4e64b3a2"
+            ]
+        ]
+    },
+    {
+        "id": "25da02cbcbbc9806",
+        "type": "file",
+        "z": "72ad2eeddb677f23",
+        "name": "Config speichern",
+        "filename": "timer_jalousie.config",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 750,
+        "y": 1360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "45d29b1e4e64b3a2",
+        "type": "switch",
+        "z": "72ad2eeddb677f23",
+        "name": "True / False",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 770,
+        "y": 1420,
+        "wires": [
+            [
+                "1ee52cf128b0b718"
+            ],
+            [
+                "2a49ea1283f188c0"
+            ]
+        ]
+    },
+    {
+        "id": "1ee52cf128b0b718",
+        "type": "change",
+        "z": "72ad2eeddb677f23",
+        "name": "Auffahren (0%)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 980,
+        "y": 1400,
+        "wires": [
+            [
+                "509b63c5158cde7d"
+            ]
+        ]
+    },
+    {
+        "id": "2a49ea1283f188c0",
+        "type": "change",
+        "z": "72ad2eeddb677f23",
+        "name": "Abfahren (100%)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "100",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 980,
+        "y": 1440,
+        "wires": [
+            [
+                "509b63c5158cde7d"
+            ]
+        ]
+    },
+    {
+        "id": "8de9c85f8b68e270",
+        "type": "debug",
+        "z": "72ad2eeddb677f23",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 980,
+        "y": 2160,
+        "wires": []
+    },
+    {
+        "id": "f84733aeb37c764a",
+        "type": "ui_group",
+        "name": "Standard",
+        "tab": "d7e90af7f419ab0c",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2474b6e626a031e7",
+        "type": "ui_group",
+        "name": "Beleuchtung",
+        "tab": "d7e90af7f419ab0c",
+        "order": 2,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "6ef876aa44faaf99",
+        "type": "ui_group",
+        "name": "Jalousie Wohnzimmer",
+        "tab": "d7e90af7f419ab0c",
+        "order": 4,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "1a75f2576e287ad4",
+        "type": "ui_group",
+        "name": "Spots Küche",
+        "tab": "d7e90af7f419ab0c",
+        "order": 3,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "c72238e2779ab1dc",
+        "type": "knxUltimate-config",
+        "host": "192.168.178.199",
+        "port": 3671,
+        "physAddr": "1.3.249",
+        "hostProtocol": "Multicast",
+        "suppressACKRequest": false,
+        "csv": "\"1.UG\"\t\"0/-/-\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"Licht\"\t\"0/0/-\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E01-01   E/A   (Technikraum E01)\"\t\"0/0/10\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-1\"\t\"Auto\"\n\"L_E01-01   DIM\"\t\"0/0/11\"\t\"\"\t\"\"\t\"\"\t\"DPST-3-7\"\t\"Auto\"\n\"L_E01-01   WERT\"\t\"0/0/12\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"L_E01-01   RM\"\t\"0/0/13\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-1\"\t\"Auto\"\n\"L_E01-01   RM WERT\"\t\"0/0/14\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E02-01   E/A   (Basteln E02)\"\t\"0/0/15\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-1\"\t\"Auto\"\n\"L_E02-01   DIM\"\t\"0/0/16\"\t\"\"\t\"\"\t\"\"\t\"DPST-3-7\"\t\"Auto\"\n\"L_E02-01   WERT\"\t\"0/0/17\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"L_E02-01   RM\"\t\"0/0/18\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-1\"\t\"Auto\"\n\"L_E02-01   RM WERT\"\t\"0/0/19\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"Jalousien\"\t\"0/1/-\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"R_E01-01   AUF/AB   (Technikraum E01)\"\t\"0/1/10\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-8\"\t\"Auto\"\n\"R_E01-01   STOPP\"\t\"0/1/11\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-7\"\t\"Auto\"\n\"R_E01-01   POSITION HÖHE\"\t\"0/1/12\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"R_E01-01   POSITION LAMELLEN\"\t\"0/1/13\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"R_E01-01   BESCHATTUNG\"\t\"0/1/14\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"R_E01-01   SPERREN\"\t\"0/1/15\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"R_E01-01   STATUS POSITION HÖHE\"\t\"0/1/16\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"R_E01-01   STATUS POSITION LAMELLEN\"\t\"0/1/17\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"R_E02-01   AUF/AB   (Basteln E02)\"\t\"0/1/20\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-8\"\t\"Auto\"\n\"R_E02-01   STOPP\"\t\"0/1/21\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-7\"\t\"Auto\"\n\"R_E02-01   POSITION HÖHE\"\t\"0/1/22\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"R_E02-01   POSITION LAMELLEN\"\t\"0/1/23\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"R_E02-01   BESCHATTUNG\"\t\"0/1/24\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"R_E02-01   SPERREN\"\t\"0/1/25\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"R_E02-01   STATUS POSITION HÖHE\"\t\"0/1/26\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"R_E02-01   STATUS POSITION LAMELLEN\"\t\"0/1/27\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"EG\"\t\"1/-/-\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"Licht\"\t\"1/0/-\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E03-01   E/A   (Wohnzimmer E03)\"\t\"1/0/10\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-1\"\t\"Auto\"\n\"L_E03-01   DIM\"\t\"1/0/11\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E03-01   WERT\"\t\"1/0/12\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E03-01   RM\"\t\"1/0/13\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E03-01   RM WERT\"\t\"1/0/14\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"LD_E03-01   E/A   (Wohnzimmer E03)\"\t\"1/0/15\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-1\"\t\"Auto\"\n\"LD_E03-01   DIM\"\t\"1/0/16\"\t\"\"\t\"\"\t\"\"\t\"DPST-3-7\"\t\"Auto\"\n\"LD_E03-01   WERT\"\t\"1/0/17\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"LD_E03-01   RM\"\t\"1/0/18\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-1\"\t\"Auto\"\n\"LD_E3-01   RM WERT\"\t\"1/0/19\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"L_E04-01   E/A   (Küche E04)\"\t\"1/0/20\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-1\"\t\"Auto\"\n\"L_E04-01   DIM\"\t\"1/0/21\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E04-01   WERT\"\t\"1/0/22\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E04-01   RM\"\t\"1/0/23\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E04-01   RM WERT\"\t\"1/0/24\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E04-02   E/A   (Küche E04)\"\t\"1/0/25\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-1\"\t\"Auto\"\n\"L_E04-02   DIM\"\t\"1/0/26\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E04-02   WERT\"\t\"1/0/27\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E04-02   RM\"\t\"1/0/28\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E04-02   RM WERT\"\t\"1/0/29\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E05-01   E/A   (Sitzplatz E05)\"\t\"1/0/30\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-1\"\t\"Auto\"\n\"L_E05-01   DIM\"\t\"1/0/31\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E05-01   WERT\"\t\"1/0/32\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E05-01   RM\"\t\"1/0/33\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E05-01   RM WERT\"\t\"1/0/34\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"Jalousie\"\t\"1/1/-\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"J_E03-01   AUF/AB   (Wohnzimmer E03)\"\t\"1/1/10\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-8\"\t\"Auto\"\n\"J_E03-01   STOPP\"\t\"1/1/11\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-7\"\t\"Auto\"\n\"J_E03-01   POSITION HÖHE\"\t\"1/1/12\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"J_E03-01   POSITION LAMELLEN\"\t\"1/1/13\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"J_E03-01   BESCHATTUNG\"\t\"1/1/14\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"J_E03-01   SPERREN\"\t\"1/1/15\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"J_E03-01  STATUS POSITION HÖHE\"\t\"1/1/16\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"J_E03-01   STATUS POSITION LAMELLEN\"\t\"1/1/17\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"J_E04-01   AUF/AB   (Küche E04)\"\t\"1/1/20\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-8\"\t\"Auto\"\n\"J_E04-01   STOPP\"\t\"1/1/21\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-7\"\t\"Auto\"\n\"J_E04-01   POSITION HÖHE\"\t\"1/1/22\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"J_E04-01   POSITION LAMELLEN\"\t\"1/1/23\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"J_E04-01   BESCHATTUNG\"\t\"1/1/24\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"J_E04-01   SPERREN\"\t\"1/1/25\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"J_E04-01   STATUS POSITION HÖHE\"\t\"1/1/26\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"J_E04-01   STATUS POSITION LAMELLEN\"\t\"1/1/27\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"1.OG\"\t\"2/-/-\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"Licht\"\t\"2/0/-\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E06-01   E/A   (Schlafzimmer E06)\"\t\"2/0/10\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-1\"\t\"Auto\"\n\"L_E06-01   DIM\"\t\"2/0/11\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E06-01   WERT\"\t\"2/0/12\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E06-01   RM E/A\"\t\"2/0/13\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E06-01   RM WERT\"\t\"2/0/14\"\t\"\"\t\"\"\t\"\"\t\"DPST-3-7\"\t\"Auto\"\n\"LD_E07-01   E/A   (Schlafzimmer E07)\"\t\"2/0/15\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-1\"\t\"Auto\"\n\"LD_E07-01   DIM\"\t\"2/0/16\"\t\"\"\t\"\"\t\"\"\t\"DPST-3-7\"\t\"Auto\"\n\"LD_E07-01   WERT\"\t\"2/0/17\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"LD_E07-01   RM\"\t\"2/0/18\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-1\"\t\"Auto\"\n\"LD_E07-01   RM WERT\"\t\"2/0/19\"\t\"\"\t\"\"\t\"\"\t\"DPST-5-1\"\t\"Auto\"\n\"Jalousie\"\t\"2/1/-\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"J_E06-01   AUF/AB   (Schlafzimmer 2)\"\t\"2/1/10\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-8\"\t\"Auto\"\n\"J_E06-01   STOPP\"\t\"2/1/11\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-17\"\t\"Auto\"\n\"J_E06-01   POSITION HÖHE\"\t\"2/1/12\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"J_E06-01   POSITION LAMELLEN\"\t\"2/1/13\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"J_E06-01   BESCHATTUNG\"\t\"2/1/14\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"J_E06-01   SPERREN\"\t\"2/1/15\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"J_E06-01   STATUS POSITION HÖHE\"\t\"2/1/16\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"J_E06-01   STATUS POSITION LAMELLEN\"\t\"2/1/17\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"J_E07-01   AUF/AB   (Schlafzimmer 1)\"\t\"2/1/20\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-8\"\t\"Auto\"\n\"J_E07-01   STOPP\"\t\"2/1/21\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-17\"\t\"Auto\"\n\"J_E07-01   POSITION HÖHE\"\t\"2/1/22\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"J_E07-01   POSITION LAMELLEN\"\t\"2/1/23\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"J_E07-01   BESCHATTUNG\"\t\"2/1/24\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"J_E07-01   SPERREN\"\t\"2/1/25\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"J_E07-01   STATUS POSITION HÖHE\"\t\"2/1/26\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"J_E07-01   STATUS POSITION LAMELLEN\"\t\"2/1/27\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"2.OG\"\t\"3/-/-\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"Licht\"\t\"3/0/-\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E08-01   E/A   (Estrich E08)\"\t\"3/0/10\"\t\"\"\t\"\"\t\"\"\t\"DPST-1-1\"\t\"Auto\"\n\"L_E08-01   DIM\"\t\"3/0/11\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E08-01   WERT\"\t\"3/0/12\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E08-01   RM\"\t\"3/0/13\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"L_E08-01   RM WERT\"\t\"3/0/14\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"Jalousie\"\t\"3/1/-\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n\"Dach\"\t\"4/-/-\"\t\"\"\t\"\"\t\"\"\t\"\"\t\"Auto\"\n",
+        "KNXEthInterface": "Auto",
+        "KNXEthInterfaceManuallyInput": "",
+        "stopETSImportIfNoDatapoint": "fake",
+        "loglevel": "error",
+        "name": "KNX Gateway",
+        "delaybetweentelegrams": 25,
+        "ignoreTelegramsWithRepeatedFlag": false,
+        "keyringFileXML": "",
+        "secureCredentialsMode": "keyring",
+        "tunnelIASelection": "Auto",
+        "tunnelIA": "",
+        "tunnelInterfaceIndividualAddress": "",
+        "tunnelUserPassword": "",
+        "tunnelUserId": "",
+        "autoReconnect": "yes",
+        "enableFlowBubbles": false,
+        "statusUpdateThrottle": "0",
+        "statusDateTimeFormat": "legacy",
+        "statusDateTimeCustom": "DD MMM HH:mm",
+        "statusDateTimeLocale": "",
+        "serialPortPath": "/dev/ttyAMA0",
+        "serialBaudRate": 19200,
+        "serialDataBits": 8,
+        "serialStopBits": 1,
+        "serialParity": "even",
+        "serialRtscts": false,
+        "serialDtr": true,
+        "serialTimeout": 1200,
+        "isKBERRY": "true"
+    },
+    {
+        "id": "d6ee027ab7fe158a",
+        "type": "ui_group",
+        "name": "Einstellungen (Links)",
+        "tab": "3355ce8e78e4208f",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "595d0c7ba3776f66",
+        "type": "ui_group",
+        "name": "Status / Anzeige (Rechts)",
+        "tab": "3355ce8e78e4208f",
+        "order": 2,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d7e90af7f419ab0c",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "3355ce8e78e4208f",
+        "type": "ui_tab",
+        "name": "Heizkreis 1",
+        "icon": "fa-thermometer-half",
+        "order": 4,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "293f1b966c138141",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6",
+            "node-red-contrib-knx-ultimate": "4.3.18",
+            "node-red-contrib-ui-time-scheduler": "1.17.2"
+        }
+    }
+]
